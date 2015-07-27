@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.5.43, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.21, for osx10.6 (x86_64)
 --
 -- Host: localhost    Database: fredericlesca
 -- ------------------------------------------------------
--- Server version	5.5.43-0+deb8u1
+-- Server version	5.6.21
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,6 +14,191 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `admin`
+--
+
+DROP TABLE IF EXISTS `admin`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `admin` (
+  `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
+  `login` varchar(30) NOT NULL,
+  `mdp` varchar(30) NOT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `admin`
+--
+
+LOCK TABLES `admin` WRITE;
+/*!40000 ALTER TABLE `admin` DISABLE KEYS */;
+INSERT INTO `admin` VALUES (3,'admin','admin33','admin'),(4,'flesca','frederic33','fred');
+/*!40000 ALTER TABLE `admin` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `contact`
+--
+
+DROP TABLE IF EXISTS `contact`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `contact` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `firstname` varchar(250) DEFAULT NULL,
+  `name` varchar(250) DEFAULT NULL,
+  `email` varchar(250) DEFAULT NULL,
+  `password` varchar(100) NOT NULL,
+  `tel` varchar(50) DEFAULT NULL,
+  `message` text,
+  `newsletter` tinyint(4) NOT NULL DEFAULT '0',
+  `fromgoldbook` tinyint(4) NOT NULL DEFAULT '0',
+  `fromcontact` tinyint(4) NOT NULL DEFAULT '0',
+  `id_facturation` int(11) DEFAULT NULL,
+  `id_livraison` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5680411 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `contact`
+--
+
+LOCK TABLES `contact` WRITE;
+/*!40000 ALTER TABLE `contact` DISABLE KEYS */;
+INSERT INTO `contact` VALUES (5680404,'Jav','gonz','jav_gonz@yahoo.com','',NULL,NULL,1,0,0,NULL,NULL),(5680405,'xav','gonza','xavier.gonzalez@free.fr','',NULL,NULL,1,0,0,NULL,NULL),(5680406,'x','gg','xavier.gonzalez@laposte.net','',NULL,NULL,1,0,0,NULL,NULL),(5680407,'xavi','gonz','xavier@gonzalez.pm','',NULL,NULL,0,0,0,NULL,NULL),(5680408,'xavier','gonzalez','fjavi.gonzalez@gmail.com','',NULL,NULL,1,0,0,NULL,NULL),(5680409,'x','g','xav335@hotmail.com','',NULL,NULL,1,0,0,NULL,NULL);
+/*!40000 ALTER TABLE `contact` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `contact_categorie`
+--
+
+DROP TABLE IF EXISTS `contact_categorie`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `contact_categorie` (
+  `id_contact` int(11) unsigned NOT NULL,
+  `id_categorie` int(10) unsigned NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `contact_categorie`
+--
+
+LOCK TABLES `contact_categorie` WRITE;
+/*!40000 ALTER TABLE `contact_categorie` DISABLE KEYS */;
+/*!40000 ALTER TABLE `contact_categorie` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `newsletter`
+--
+
+DROP TABLE IF EXISTS `newsletter`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `newsletter` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `date` datetime DEFAULT NULL,
+  `titre` varchar(250) DEFAULT NULL,
+  `bas_page` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `newsletter`
+--
+
+LOCK TABLES `newsletter` WRITE;
+/*!40000 ALTER TABLE `newsletter` DISABLE KEYS */;
+INSERT INTO `newsletter` VALUES (30,'2015-07-08 00:00:00','Démarrez l\'été en fraicheur','f');
+/*!40000 ALTER TABLE `newsletter` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `newsletter_detail`
+--
+
+DROP TABLE IF EXISTS `newsletter_detail`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `newsletter_detail` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id_newsletter` int(10) unsigned NOT NULL,
+  `titre` varchar(250) DEFAULT NULL,
+  `url` varchar(250) DEFAULT NULL,
+  `link` varchar(250) DEFAULT NULL,
+  `texte` text,
+  PRIMARY KEY (`id`,`id_newsletter`)
+) ENGINE=InnoDB AUTO_INCREMENT=714 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `newsletter_detail`
+--
+
+LOCK TABLES `newsletter_detail` WRITE;
+/*!40000 ALTER TABLE `newsletter_detail` DISABLE KEYS */;
+INSERT INTO `newsletter_detail` VALUES (713,30,'','/IMG_1205 - Copy 1-30.jpg','http://www.fredericlesca.com/','');
+/*!40000 ALTER TABLE `newsletter_detail` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `newsletter_journal`
+--
+
+DROP TABLE IF EXISTS `newsletter_journal`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `newsletter_journal` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `date_envoi` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `id_newsletter` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `newsletter_journal`
+--
+
+LOCK TABLES `newsletter_journal` WRITE;
+/*!40000 ALTER TABLE `newsletter_journal` DISABLE KEYS */;
+/*!40000 ALTER TABLE `newsletter_journal` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `newsletter_journal_detail`
+--
+
+DROP TABLE IF EXISTS `newsletter_journal_detail`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `newsletter_journal_detail` (
+  `id_newsletter_journal` int(11) unsigned NOT NULL,
+  `email` varchar(50) CHARACTER SET utf8 NOT NULL,
+  `read` tinyint(4) NOT NULL DEFAULT '0',
+  `coderandom` varchar(20) CHARACTER SET utf8 DEFAULT NULL,
+  `error` varchar(250) CHARACTER SET utf8 DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `newsletter_journal_detail`
+--
+
+LOCK TABLES `newsletter_journal_detail` WRITE;
+/*!40000 ALTER TABLE `newsletter_journal_detail` DISABLE KEYS */;
+/*!40000 ALTER TABLE `newsletter_journal_detail` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `wp_commentmeta`
@@ -378,4 +563,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-07-27 15:11:46
+-- Dump completed on 2015-07-27 16:18:33
